@@ -4,6 +4,9 @@
 
 	<title>Mic Test</title>
 
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 	<!-- AngularJS -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
@@ -18,7 +21,7 @@
 
 <div ng-controller="ArticleController">
 
-	<table>
+	<table class="table table-bordered table-striped">
 		<tr>
 			<th>Unpublished Articles ({{articles.length}})</th>
 			<th>Author</th>
@@ -27,7 +30,8 @@
 		</tr>
 		<tr ng-repeat="article in articles | limitTo:10">
 			<td>
-				<p>{{article.title}}</p>
+				<img class='thumb pull-left' ng-src="{{article.image}}">
+				<a href="{{article.url}}">{{article.title}}</a>
 			</td>
 			<td>
 				<p>{{article.profile.first_name}} {{article.profile.last_name}}</p>
@@ -44,6 +48,12 @@
 	<button>Load More!</button>
 	
 </div>
+
+<style>
+	.thumb {
+		height: 50px;
+	}
+</style>
 
 </body>
 </html>
