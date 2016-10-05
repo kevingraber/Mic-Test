@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Mic Test</title>
+
+	<!-- AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+	<!-- My AngularJS Files -->
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="ArticleController.js"></script>
+
+</head>
+<body ng-app="MicApp">
+
+<h1>Mic Test!</h1>
+
+<div ng-controller="ArticleController">
+
+	<table>
+		<tr>
+			<th>Unpublished Articles ({{articles.length}})</th>
+			<th>Author</th>
+			<th>Words</th>
+			<th>Submitted????</th>
+		</tr>
+		<tr ng-repeat="article in articles | limitTo:10">
+			<td>
+				<p>{{article.title}}</p>
+			</td>
+			<td>
+				<p>{{article.profile.first_name}} {{article.profile.last_name}}</p>
+			</td>
+			<td>
+				<p>{{article.words}}</p>
+			</td>
+			<td>
+				<p>{{article.publish_at}}</p>
+			</td>
+		</tr>
+	</table>
+
+	<button>Load More!</button>
+	
+</div>
+
+</body>
+</html>
