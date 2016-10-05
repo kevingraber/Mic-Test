@@ -1,1 +1,1 @@
-var app = angular.module('MicApp', []);
+var app = angular.module('MicApp', ['ngtimeago']);

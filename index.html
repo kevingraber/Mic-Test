@@ -14,6 +14,9 @@
 	<script type="text/javascript" src="app.js"></script>
 	<script type="text/javascript" src="ArticleController.js"></script>
 
+	<!-- ngtimeago -->
+	<script type="text/javascript" src="ngtimeago.js"></script>
+
 </head>
 <body ng-app="MicApp">
 
@@ -28,7 +31,7 @@
 			<th>Words</th>
 			<th>Submitted????</th>
 		</tr>
-		<tr ng-repeat="article in articles | limitTo:10">
+		<tr ng-repeat="article in articles | orderBy:'publish_at' | limitTo:10">
 			<td>
 				<img class='thumb pull-left' ng-src="{{article.image}}">
 				<a href="{{article.url}}">{{article.title}}</a>
@@ -40,7 +43,7 @@
 				<p>{{article.words}}</p>
 			</td>
 			<td>
-				<p>{{article.publish_at}}</p>
+				<p>{{article.publish_at | timeago}}</p>
 			</td>
 		</tr>
 	</table>
