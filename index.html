@@ -17,45 +17,91 @@
 	<!-- ngtimeago -->
 	<script type="text/javascript" src="ngtimeago.js"></script>
 
+	<!-- Google Font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
 </head>
 <body ng-app="MicApp">
 
-<h1>Mic Test!</h1>
+<div class="container" ng-controller="ArticleController">
 
-<div ng-controller="ArticleController">
+	<div>
+		<table class="table table-bordered table-striped">
+			<tr>
+				<th>UNPUBLISHED ARTICLES ({{articles.length}})</th>
+				<th>AUTHOR</th>
+				<th class='sortable' ng-click="sortVariable = 'words'; sortDirection = !sortDirection">WORDS</th>
+				<th class='sortable' ng-click="sortVariable = 'publish_at'; sortDirection = !sortDirection">SUBMITTED????</th>
+			</tr>
+			<tr ng-repeat="article in articles | limitTo:articlesToLoad | orderBy:sortVariable:sortDirection">
+				<td>
+					<img class='thumb pull-left' ng-src="{{article.image}}">
+					<a href="{{article.url}}" target="_blank">{{article.title}}</a>
+				</td>
+				<td>
+					<p class='bigMargin'>{{article.profile.first_name}} {{article.profile.last_name}}</p>
+				</td>
+				<td class='text-center'>
+					<p>{{article.words}}</p>
+				</td>
+				<td class='text-center'>
+					<p>{{article.publish_at}}</p>
+					<!-- <p>{{article.publish_at | timeago}}</p> -->
+				</td>
+			</tr>
+		</table>	
+	</div>
 
-	<table class="table table-bordered table-striped">
-		<tr>
-			<th>Unpublished Articles ({{articles.length}})</th>
-			<th>Author</th>
-			<th>Words</th>
-			<th>Submitted????</th>
-		</tr>
-		<tr ng-repeat="article in articles | orderBy:'publish_at' | limitTo:10">
-			<td>
-				<img class='thumb pull-left' ng-src="{{article.image}}">
-				<a href="{{article.url}}">{{article.title}}</a>
-			</td>
-			<td>
-				<p>{{article.profile.first_name}} {{article.profile.last_name}}</p>
-			</td>
-			<td>
-				<p>{{article.words}}</p>
-			</td>
-			<td>
-				<p>{{article.publish_at | timeago}}</p>
-			</td>
-		</tr>
-	</table>
+	<div class="row">
+		<div class="col-sm-12 text-center">
+			<button ng-hide="allArticlesLoaded" ng-click='loadmore()'>Load More!</button>
+			<p ng-show="allArticlesLoaded">No more articles :)</p>
+		</div>
+	</div>
 
-	<button>Load More!</button>
-	
 </div>
 
 <style>
+
+	table {
+		font-family: 'Montserrat', sans-serif;
+	}
+	
+	.sortable {
+		cursor: pointer;
+	}
+
+	.container {
+		margin-top: 75px;
+		margin-bottom: 75px;
+	}
+
+	td {
+		padding: 8px;
+	}
+
 	.thumb {
 		height: 50px;
+		width: 50px;
+		margin-right: 10px;
 	}
+
+	td p {
+		margin: 0px;
+	}
+
+	.table > tbody > tr > td, .table > tbody > tr > th, .table > tbody > tr > a {
+	    vertical-align: middle;
+	}
+
+	.bigMargin {
+		margin-left: 15px
+	}
+
+	th {
+		height:65px;
+	}
+
 </style>
 
 </body>
