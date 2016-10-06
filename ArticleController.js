@@ -1,14 +1,20 @@
 app.controller('ArticleController', function($scope, $http) {
 
-	$scope.sortVariable = '';
-	$scope.sortDirection = false;
+	// If we have no saved sort direction, revert to default.
+	if ( localStorage.getItem('savedDirection') === null ) {
+		$scope.sortDirection = false;
+	} else {
+		// local storage can only store strings, so we have to convert our 'true/false' string into a boolean.
+		$scope.sortDirection = JSON.parse(localStorage.getItem('savedDirection'));
+	};
+
+
+	$scope.sortVariable = localStorage.getItem("savedSort");
 	$scope.articlesToLoad = 10;
 	$scope.allArticlesLoaded = false;
 
 	$http.get('data/articles.json').then(function(response){
-		console.log(response)
 		$scope.articles = response.data;
-		console.log($scope.articles)
 	});
 
 	// Function that triggers when you click the 'Load More' button.
@@ -18,18 +24,22 @@ app.controller('ArticleController', function($scope, $http) {
 
 		if ($scope.articlesToLoad == 40) {
 			$http.get('data/more-articles.json').then(function(response){
-				console.log(response.data)
 				$scope.articles = $scope.articles.concat(response.data);
-				console.log($scope.articles)
 			});
 		};
 
 		if ($scope.articlesToLoad == 60) {
 			$scope.allArticlesLoaded = true;
-		}
-		console.log($scope.articlesToLoad)
-		console.log($scope.allArticlesLoaded)
+		};
 
+	};
+
+	// Funtion that triggers when you click on a column to sort it.
+	$scope.sort = function(variable) {
+		$scope.sortVariable = variable;
+		$scope.sortDirection = !$scope.sortDirection;
+		localStorage.setItem("savedSort", variable);
+		localStorage.setItem("savedDirection", $scope.sortDirection);
 	};
 
 });
