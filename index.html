@@ -11,36 +11,34 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 
 	<!-- My AngularJS Files -->
-	<script type="text/javascript" src="app.js"></script>
-	<script type="text/javascript" src="ArticleController.js"></script>
+	<script type="text/javascript" src="javascript/app.js"></script>
+	<script type="text/javascript" src="javascript/ArticleController.js"></script>
 
 	<!-- ngtimeago -->
-	<script type="text/javascript" src="ngtimeago.js"></script>
+	<script type="text/javascript" src="javascript/ngtimeago.js"></script>
 
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
 	<!-- My CSS -->
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="style/style.css">
 
 </head>
 <body ng-app="MicApp">
 
 <div class="container" ng-controller="ArticleController">
-<h1>THE CURRENT FILTER IS {{sortVariable}}</h1>
-<h1>THE CURRENT DIRECTION IS {{sortDirection}}</h1>
 
 	<div>
 		<table class="table table-bordered table-striped">
-			<tr>
+			<tr id="header">
 				<th>UNPUBLISHED ARTICLES ({{articles.length}})</th>
 				<th>AUTHOR</th>
 				<th class='sortable' ng-click="sort('words')">WORDS</th>
-				<th class='sortable' ng-click="sort('publish_at')">SUBMITTED????</th>
+				<th class='sortable' ng-click="sort('publish_at')">SUBMITTED</th>
 			</tr>
 			<tr ng-repeat="article in articles | limitTo:articlesToLoad | orderBy:sortVariable:sortDirection">
 				<td>
-					<img class='thumb pull-left' ng-src="{{article.image}}">
+					<div class="thumb pull-left" ng-style="{'background-image': 'url(' + article.image + ')'}"></div>
 					<a href="{{article.url}}" target="_blank">{{article.title}}</a>
 				</td>
 				<td>
@@ -58,8 +56,8 @@
 
 	<div class="row">
 		<div class="col-sm-12 text-center">
-			<button ng-hide="allArticlesLoaded" ng-click='loadmore()'>Load More!</button>
-			<p ng-show="allArticlesLoaded">No more articles :)</p>
+			<button class='btn' ng-hide="allArticlesLoaded" ng-click='loadmore()'>Load More!</button>
+			<p ng-show="allArticlesLoaded">No more articles to load :)</p>
 		</div>
 	</div>
 

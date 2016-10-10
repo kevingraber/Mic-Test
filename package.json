@@ -1,0 +1,23 @@
+{
+  "name": "mic-text",
+  "version": "1.0.0",
+  "description": "Front-end test for my application to Mic.",
+  "main": "app.js",
+  "scripts": {
+    "start": "http-server -o",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevingraber/Mic-Test.git"
+  },
+  "author": "Kevin Graber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevingraber/Mic-Test/issues"
+  },
+  "homepage": "https://github.com/kevingraber/Mic-Test#readme",
+  "dependencies": {
+    "http-server": "^0.9.0"
+  }
+}

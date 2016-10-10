@@ -13,6 +13,7 @@ app.controller('ArticleController', function($scope, $http) {
 	$scope.articlesToLoad = 10;
 	$scope.allArticlesLoaded = false;
 
+	// Load our first set of articles.
 	$http.get('data/articles.json').then(function(response){
 		$scope.articles = response.data;
 	});
